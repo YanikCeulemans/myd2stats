@@ -1,0 +1,42 @@
+<form ng-submit="calculate()">
+    <div class="form-horizontal">
+        <div class="control-group">
+            <div class="control-label">
+                <label for="playername">Playername:</label>
+            </div>
+            <div class="controls">
+                <input type="text" id="playername" name="playername" ng-model="dota2Model.queryPlayer"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="control-label">
+                <label for="heroid">Hero:</label>
+            </div>
+            <div class="controls">
+                <select name="heroid" id="heroid" ng-model="dota2Model.queryHero" ng-options="hero.localized_name for hero in dota2Model.heroList">
+                    <option value="">-- Select hero --</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn">Calculate</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<table class="table" ng-show="dota2Model.matchHistory">
+    <thead>
+        <tr>
+            <th>Matchid</th>
+            <th>Start time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="match in dota2Model.matchHistory.matches">
+            <td ng-click="getMatch(match.match_id)">{{ match.match_id }}</td>
+            <td>{{ match.start_time | date:'dd/MM/yyyy'}}</td>
+        </tr>
+    </tbody>
+</table>
